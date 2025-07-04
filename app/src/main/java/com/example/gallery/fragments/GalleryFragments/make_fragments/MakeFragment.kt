@@ -44,6 +44,6 @@ class MakeFragment : Fragment(), MyOnItemClickListener {
     }
 
     override fun onItemClick(item: MakePhotoItem) {
-        binding.imageView3.setImageResource(item.imageID)
+        binding.imageMake.setImageResource(item.imageID)
     }
 }

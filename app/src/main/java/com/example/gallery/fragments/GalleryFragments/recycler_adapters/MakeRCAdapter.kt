@@ -34,7 +34,7 @@ class MakeRCAdapter(private val listener: MyOnItemClickListener) :
         private val listener: MyOnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MakePhotoItem) {
-                binding.imageView5.setImageResource(item.imageID)
+                binding.imagePhotoItem.setImageResource(item.imageID)
                 binding.root.setOnClickListener { root ->
                     listener.onItemClick(item)
                 }

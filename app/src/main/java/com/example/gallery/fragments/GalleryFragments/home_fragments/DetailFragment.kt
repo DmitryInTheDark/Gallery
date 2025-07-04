@@ -33,7 +33,7 @@ class DetailFragment : Fragment() {
         binding.materialToolbar5.setupWithNavController(navController)
         binding.materialToolbar5.title = null
 
-         binding.button.setOnClickListener{
+         binding.buttonConfirmDetailsChanges.setOnClickListener{
              binding.materialToolbar5.menu.add("Edit")
              binding.detailLayout.visibility = View.VISIBLE
              binding.editLayout.visibility = View.GONE

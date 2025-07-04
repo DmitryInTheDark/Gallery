@@ -28,7 +28,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navController = (childFragmentManager.findFragmentById(R.id.fragmentContainerView4) as NavHostFragment).navController
+        val navController = (childFragmentManager.findFragmentById(R.id.secondFragmentContainer) as NavHostFragment).navController
 
         binding.mainBottomNavView.setupWithNavController(navController)
 

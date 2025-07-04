@@ -34,19 +34,19 @@ class EditPasswordFragment : Fragment() {
 
         val navController = findNavController()
 
-        binding.materialToolbar4.setupWithNavController(navController)
+        binding.toolbarEditPassword.setupWithNavController(navController)
 
-        binding.userNameEditText2.addTextChangedListener(object : TextWatcher {
+        binding.editTextOldPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
-                if (s.isNotEmpty() && binding.birthdayEditText2.text.isNotEmpty() && binding.phoneNumberEditText2.text.isNotEmpty()){
-                    binding.button3.isEnabled = true
-                    binding.button3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
-                    binding.button3.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                if (s.isNotEmpty() && binding.editTextOldPassword.text.isNotEmpty() && binding.editTextOldPassword.text.isNotEmpty()){
+                    binding.buttonConfirmPasswordChange.isEnabled = true
+                    binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
+                    binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 }else {
-                    binding.button3.isEnabled = false
-                    binding.button3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_light))
-                    binding.button3.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                    binding.buttonConfirmPasswordChange.isEnabled = false
+                    binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_light))
+                    binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -57,17 +57,17 @@ class EditPasswordFragment : Fragment() {
                 return
             }
         })
-        binding.birthdayEditText2.addTextChangedListener(object : TextWatcher {
+        binding.editTextNewPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
-                if (s.isNotEmpty() && binding.userNameEditText2.text.isNotEmpty() && binding.phoneNumberEditText2.text.isNotEmpty()){
-                    binding.button3.isEnabled = true
-                    binding.button3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
-                    binding.button3.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                if (s.isNotEmpty() && binding.editTextNewPassword.text.isNotEmpty() && binding.editTextNewPassword.text.isNotEmpty()){
+                    binding.buttonConfirmPasswordChange.isEnabled = true
+                    binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
+                    binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 }else {
-                    binding.button3.isEnabled = false
-                    binding.button3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_light))
-                    binding.button3.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                    binding.buttonConfirmPasswordChange.isEnabled = false
+                    binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_light))
+                    binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -78,17 +78,17 @@ class EditPasswordFragment : Fragment() {
                 return
             }
         })
-        binding.phoneNumberEditText2.addTextChangedListener(object : TextWatcher {
+        binding.editTextConfirmPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
-                if (s.isNotEmpty() && binding.userNameEditText2.text.isNotEmpty() && binding.birthdayEditText2.text.isNotEmpty()){
-                    binding.button3.isEnabled = true
-                    binding.button3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
-                    binding.button3.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                if (s.isNotEmpty() && binding.editTextConfirmPassword.text.isNotEmpty() && binding.editTextConfirmPassword.text.isNotEmpty()){
+                    binding.buttonConfirmPasswordChange.isEnabled = true
+                    binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
+                    binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
                 }else {
-                    binding.button3.isEnabled = false
-                    binding.button3.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_light))
-                    binding.button3.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+                    binding.buttonConfirmPasswordChange.isEnabled = false
+                    binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray_light))
+                    binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
                 }
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -100,7 +100,7 @@ class EditPasswordFragment : Fragment() {
             }
         })
 
-        binding.button3.setOnClickListener {
+        binding.buttonConfirmPasswordChange.setOnClickListener {
             navController.navigate(R.id.action_editPasswordFragment_to_congratulationFragment)
         }
     }

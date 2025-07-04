@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.gallery.R
-import com.example.gallery.databinding.ProfileFragmentBinding
 import com.example.gallery.databinding.SettingsFragmentBinding
 
 class SettingsFragment : Fragment() {
@@ -32,20 +30,20 @@ class SettingsFragment : Fragment() {
 
         val navController = findNavController()
 
-        binding.materialToolbar2.setupWithNavController(navController)
+        binding.toolbarSettings.setupWithNavController(navController)
 
-        binding.button5.setOnClickListener {
+        binding.buttonBackSettings.setOnClickListener {
             navController.navigateUp()
         }
 
-        binding.textView19.setOnClickListener {
+        binding.textResetPassword.setOnClickListener {
             navController.navigate(R.id.action_settingsFragment_to_editPasswordFragment)
         }
 
-        binding.textView17.setOnClickListener {
+        binding.textDeleteAccount.setOnClickListener {
             showDeleteDialog()
         }
-        binding.textView16.setOnClickListener {
+        binding.textSignOut.setOnClickListener {
             showExitDialog()
         }
     }
@@ -57,11 +55,12 @@ class SettingsFragment : Fragment() {
             .setView(dialog)
             .show()
 
-        dialog.findViewById<TextView>(R.id.textView22).setOnClickListener {
+        dialog.findViewById<TextView>(R.id.alert_sign_out_text).setOnClickListener {
+            alertDialog.dismiss()
             requireActivity().finish()
         }
 
-        dialog.findViewById<TextView>(R.id.textView24).setOnClickListener {
+        dialog.findViewById<TextView>(R.id.alert_sign_out_cancel_text).setOnClickListener {
             alertDialog.dismiss()
         }
 
@@ -73,11 +72,12 @@ class SettingsFragment : Fragment() {
             .setView(dialog)
             .show()
 
-        dialog.findViewById<TextView>(R.id.textView22).setOnClickListener {
+        dialog.findViewById<TextView>(R.id.alert_delete_text).setOnClickListener {
+            alertDialog.dismiss()
             requireActivity().finish()
         }
 
-        dialog.findViewById<TextView>(R.id.textView24).setOnClickListener {
+        dialog.findViewById<TextView>(R.id.alert_delete_cancel_text).setOnClickListener {
             alertDialog.dismiss()
         }
 

@@ -37,7 +37,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextText3"
+            android:id="@+id/editNameNewPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -49,7 +49,7 @@
             android:padding="10dp" />
 
         <EditText
-            android:id="@+id/editTextText4"
+            android:id="@+id/editDescriptionNewPhoto"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:autoText="false"
@@ -68,7 +68,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioNew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -76,7 +76,7 @@
                 android:text="New" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_button_selector"
@@ -85,7 +85,7 @@
         </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button2"
+            android:id="@+id/buttonAddNewPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gray_light"

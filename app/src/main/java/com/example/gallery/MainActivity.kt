@@ -1,18 +1,12 @@
 package com.example.gallery
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.fragment.NavHostFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://gallery.prod2.webant.ru/"
 
@@ -28,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val navController = (supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment).navController
+        val navController = (supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment).navController
 
 //        val retrofit = Retrofit.Builder()
 //            .baseUrl(BASE_URL)

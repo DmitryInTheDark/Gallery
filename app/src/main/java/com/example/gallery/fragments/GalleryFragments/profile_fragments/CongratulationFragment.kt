@@ -27,7 +27,7 @@ class CongratulationFragment : Fragment() {
 
         val navController = findNavController()
 
-        binding.button4.setOnClickListener {
+        binding.buttonConfirm.setOnClickListener {
             navController.navigate(R.id.action_congratulationFragment_to_settingsFragment)
         }
     }

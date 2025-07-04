@@ -11,19 +11,12 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <EditText
-        android:id="@+id/editTextText8"
+    <SearchView
+        android:id="@+id/searcHome"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/edit_text_style"
-        android:backgroundTint="@color/gray_light"
-        android:drawableStart="@drawable/searc_icon"
-        android:drawablePadding="20dp"
-        android:ems="10"
-        android:hint="Search"
-        android:inputType="text"
-        android:paddingLeft="15dp"
-        android:textSize="16sp" />
+        android:backgroundTint="@color/gray_light" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/homeTabLayout"

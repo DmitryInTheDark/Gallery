@@ -23,9 +23,9 @@ class NewPhotosRCAdapter(private val navController: NavController): RecyclerView
     class NewPhotosViewHolder(private val binding: PhotoItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(count: Int, click: () -> Unit){
             if (count%2 != 0) {
-                binding.imageView5.setImageResource(R.drawable.test_photo)
+                binding.imagePhotoItem.setImageResource(R.drawable.test_photo)
             }else{
-                binding.imageView5.setImageResource(R.drawable.test_photo2)
+                binding.imagePhotoItem.setImageResource(R.drawable.test_photo2)
             }
             binding.root.setOnClickListener {
                 click()

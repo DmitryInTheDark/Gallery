@@ -15,9 +15,9 @@ class ProfileRCAdapter: RecyclerView.Adapter<ProfileViewHolder>() {
     class ProfileViewHolder(private val binding: PhotoItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(count: Int){
             if (count%2 != 0) {
-                binding.imageView5.setImageResource(R.drawable.test_photo)
+                binding.imagePhotoItem.setImageResource(R.drawable.test_photo)
             }else{
-                binding.imageView5.setImageResource(R.drawable.test_photo2)
+                binding.imagePhotoItem.setImageResource(R.drawable.test_photo2)
             }
         }
     }

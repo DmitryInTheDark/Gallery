@@ -37,7 +37,7 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textImageName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -50,7 +50,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,7 +59,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/textImageCreatedData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -70,7 +70,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/textImageDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="14dp"
@@ -98,7 +98,7 @@
             android:orientation="horizontal" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/editTextImageName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -110,7 +110,7 @@
             android:text="Image Name" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/editTextImageDescription"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:autoText="false"
@@ -128,7 +128,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButtonNew"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -136,7 +136,7 @@
                 android:text="New" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtonPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_button_selector"
@@ -145,7 +145,7 @@
         </RadioGroup>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonConfirmDetailsChanges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
