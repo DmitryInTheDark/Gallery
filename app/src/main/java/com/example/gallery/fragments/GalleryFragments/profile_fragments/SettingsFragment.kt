@@ -32,7 +32,7 @@ class SettingsFragment : Fragment() {
 
         binding.toolbarSettings.setupWithNavController(navController)
 
-        binding.buttonBackSettings.setOnClickListener {
+        binding.buttonSaveSettings.setOnClickListener {
             navController.navigateUp()
         }
 

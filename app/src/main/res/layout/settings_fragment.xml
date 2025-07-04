@@ -103,12 +103,12 @@
             android:text="Email" />
 
         <Button
-            android:id="@+id/buttonBackSettings"
+            android:id="@+id/buttonSaveSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:backgroundTint="@color/black"
-            android:text="Back" />
+            android:text="Save" />
 
         <TextView
             android:id="@+id/textResetPassword"
