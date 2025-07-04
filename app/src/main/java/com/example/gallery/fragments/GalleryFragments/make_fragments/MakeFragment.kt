@@ -15,6 +15,7 @@ import com.example.gallery.databinding.MakeFragmentBinding
 import com.example.gallery.fragments.GalleryFragments.recycler_adapters.MakeRCAdapter
 import com.example.gallery.fragments.GalleryFragments.recycler_adapters.MyOnItemClickListener
 import com.example.gallery.fragments.GalleryFragments.recycler_adapters.NewPhotosRCAdapter
+import com.example.gallery.fragments.GalleryFragments.recycler_adapters.PhotoItem
 
 class MakeFragment : Fragment(), MyOnItemClickListener {
 
@@ -43,7 +44,7 @@ class MakeFragment : Fragment(), MyOnItemClickListener {
         }
     }
 
-    override fun onItemClick(item: MakePhotoItem) {
-        binding.imageMake.setImageResource(item.imageID)
+    override fun onItemClick(item: PhotoItem) {
+        binding.imageMake.setImageResource(item.image)
     }
 }

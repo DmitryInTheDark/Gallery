@@ -16,26 +16,35 @@ import com.example.gallery.fragments.GalleryFragments.recycler_adapters.NewPhoto
 
 //Я уже забыл, как клики на элементы делаются через интерфейс, поэтому когда логику буду прописывать,
 //добавлю это, а пока что пусть контроллер будет в адаптере(да, со мной будет трудно работать)
-class NewPhotosRCAdapter(private val navController: NavController): RecyclerView.Adapter<NewPhotosViewHolder>()  {
+class NewPhotosRCAdapter(private val listener: MyOnItemClickListener): RecyclerView.Adapter<NewPhotosViewHolder>()  {
 
-    var count = 0
+    val itemList = listOf(
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+    )
 
-    class NewPhotosViewHolder(private val binding: PhotoItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(count: Int, click: () -> Unit){
-            if (count%2 != 0) {
-                binding.imagePhotoItem.setImageResource(R.drawable.test_photo)
-            }else{
-                binding.imagePhotoItem.setImageResource(R.drawable.test_photo2)
-            }
+    class NewPhotosViewHolder(private val binding: PhotoItemBinding, private val listener: MyOnItemClickListener) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: PhotoItem){
+            binding.imagePhotoItem.setImageResource(item.image)
             binding.root.setOnClickListener {
-                click()
+                listener.onItemClick(item)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewPhotosViewHolder {
         val binding = PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NewPhotosViewHolder(binding)
+        return NewPhotosViewHolder(binding, listener)
     }
 
     override fun getItemCount(): Int {
@@ -43,8 +52,7 @@ class NewPhotosRCAdapter(private val navController: NavController): RecyclerView
     }
 
     override fun onBindViewHolder(holder: NewPhotosViewHolder, position: Int) {
-        count++
-        holder.bind(count, { navController.navigate(R.id.action_homeFragment_to_detailFragment) })
+        holder.bind(itemList[position])
     }
 
 }

@@ -17,25 +17,27 @@ class MakeRCAdapter(private val listener: MyOnItemClickListener) :
     var count = 0
 
     val itemList = listOf(
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
-        MakePhotoItem(R.drawable.test_photo), MakePhotoItem(R.drawable.test_photo2),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
+        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
+        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
     )
 
     class MakeViewHolder(
         private val binding: PhotoItemBinding,
         private val listener: MyOnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MakePhotoItem) {
-                binding.imagePhotoItem.setImageResource(item.imageID)
-                binding.root.setOnClickListener { root ->
+        fun bind(item: PhotoItem) {
+                binding.imagePhotoItem.setImageResource(item.image)
+                binding.root.setOnClickListener {
                     listener.onItemClick(item)
                 }
         }

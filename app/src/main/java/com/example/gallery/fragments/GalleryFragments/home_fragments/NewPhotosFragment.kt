@@ -10,13 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.gallery.R
 import com.example.gallery.databinding.NewPhotosFragmentBinding
+import com.example.gallery.fragments.GalleryFragments.recycler_adapters.MyOnItemClickListener
 import com.example.gallery.fragments.GalleryFragments.recycler_adapters.NewPhotosRCAdapter
+import com.example.gallery.fragments.GalleryFragments.recycler_adapters.PhotoItem
+import com.example.gallery.fragments.GalleryFragments.recycler_adapters.PhotoItemType
 
-class NewPhotosFragment : Fragment() {
+class NewPhotosFragment : Fragment(), MyOnItemClickListener {
 
     private lateinit var binding: NewPhotosFragmentBinding
     private lateinit var adapter: NewPhotosRCAdapter
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +35,9 @@ class NewPhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navController = findNavController()
+        navController = findNavController()
 
-        adapter = NewPhotosRCAdapter(navController)
+        adapter = NewPhotosRCAdapter(this)
         binding.newPhotosRCView.adapter = adapter
         binding.newPhotosRCView.layoutManager = GridLayoutManager(requireContext(), 2)
 
@@ -46,5 +51,16 @@ class NewPhotosFragment : Fragment() {
             binding.errorLayout.visibility = View.GONE
             binding.newPhotosRCView.visibility = View.VISIBLE
         }
+    }
+
+    override fun onItemClick(item: PhotoItem) {
+
+        val args = Bundle()
+
+        args.putString("title", item.title)
+        args.putString("description", item.description)
+        args.putInt("image", item.image)
+        if (item.type == PhotoItemType.New) args.putBoolean("new?", true) else args.putBoolean("new?", false)
+        navController.navigate(R.id.action_homeFragment_to_detailFragment, args)
     }
 }
