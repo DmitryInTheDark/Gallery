@@ -39,7 +39,6 @@ class DetailFragment : Fragment() {
 
         binding.imageView6.setImageResource(args?.getInt("image") ?: R.drawable.test_photo)
         binding.textImageName.text = args?.getString("title") ?: "Default title"
-        binding.textImageName.text = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
         binding.textImageDescription.text = args?.getString("description") ?: "Default description"
 
         binding.imageView6.setImageResource(args?.getInt("image") ?: R.drawable.test_photo)
