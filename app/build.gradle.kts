@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.photoview)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.androidx.cardview)
