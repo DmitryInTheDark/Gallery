@@ -46,7 +46,8 @@ class DetailFragment : Fragment() {
         binding.editTextImageDescription.setText(args?.getString("description") ?: "Default description")
 
         val isNew = args?.getBoolean("new?") ?: true
-        if (isNew) binding.radioButtonNew.isChecked else binding.radioButtonPopular.isChecked
+        binding.radioButtonNew.isChecked = isNew
+        binding.radioButtonPopular.isChecked = !isNew
 
         Log.i("my", args?.getString("title") ?: "Ничего не пришло")
         Log.i("my", args?.getString("description") ?: "Ничего не пришло")
