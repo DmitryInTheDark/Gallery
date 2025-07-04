@@ -48,7 +48,7 @@ class NewPhotosRCAdapter(private val listener: MyOnItemClickListener): RecyclerV
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: NewPhotosViewHolder, position: Int) {
