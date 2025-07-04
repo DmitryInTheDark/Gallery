@@ -19,6 +19,7 @@ fragment = "1.8.8"
 recyclerview = "1.4.0"
 viewpager2 = "1.1.0"
 cardview = "1.0.0"
+jetbrainsKotlinJvm = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,4 +49,6 @@ androidx-cardview = { group = "androidx.cardview", name = "cardview", version.re
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
