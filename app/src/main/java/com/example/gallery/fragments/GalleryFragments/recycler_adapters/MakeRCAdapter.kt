@@ -4,10 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.R
-import com.example.gallery.databinding.PhotoItemBinding
+import com.example.gallery.databinding.PhotoItemMakeBinding
 import com.example.gallery.fragments.GalleryFragments.recycler_adapters.MakeRCAdapter.MakeViewHolder
-import com.example.gallery.fragments.GalleryFragments.make_fragments.MakePhotoItem
-import kotlinx.coroutines.currentCoroutineContext
 
 
 //Тут я вспомнил, как делать через интерфейс
@@ -32,7 +30,7 @@ class MakeRCAdapter(private val listener: MyOnItemClickListener) :
     )
 
     class MakeViewHolder(
-        private val binding: PhotoItemBinding,
+        private val binding: PhotoItemMakeBinding,
         private val listener: MyOnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PhotoItem) {
@@ -44,7 +42,7 @@ class MakeRCAdapter(private val listener: MyOnItemClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MakeViewHolder {
-        val binding = PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = PhotoItemMakeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MakeViewHolder(binding, listener)
     }
 

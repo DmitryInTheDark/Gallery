@@ -117,6 +117,7 @@
             android:autoText="false"
             android:background="@drawable/edit_text_style"
             android:ems="10"
+            android:gravity="top"
             android:inputType="textMultiLine"
             android:isScrollContainer="true"
             android:maxLines="15"

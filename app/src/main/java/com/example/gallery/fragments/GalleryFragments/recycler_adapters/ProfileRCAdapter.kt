@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.R
-import com.example.gallery.databinding.PhotoItemBinding
-import com.example.gallery.fragments.GalleryFragments.recycler_adapters.NewPhotosRCAdapter.NewPhotosViewHolder
+import com.example.gallery.databinding.PhotoItemProfileBinding
 import com.example.gallery.fragments.GalleryFragments.recycler_adapters.ProfileRCAdapter.ProfileViewHolder
 
 class ProfileRCAdapter: RecyclerView.Adapter<ProfileViewHolder>() {
 
     var count = 0
 
-    class ProfileViewHolder(private val binding: PhotoItemBinding):RecyclerView.ViewHolder(binding.root) {
+    class ProfileViewHolder(private val binding: PhotoItemProfileBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(count: Int){
             if (count%2 != 0) {
                 binding.imagePhotoItem.setImageResource(R.drawable.test_photo)
@@ -23,7 +22,7 @@ class ProfileRCAdapter: RecyclerView.Adapter<ProfileViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileViewHolder {
-        val binding = PhotoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = PhotoItemProfileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProfileViewHolder(binding)
     }
 
