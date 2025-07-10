@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Photos"
+        android:icon="@drawable/choose_photo_icon"
+        />
+    <item android:title="Album"
+        android:icon="@drawable/bottom_album_icon"
+        />
+</menu>

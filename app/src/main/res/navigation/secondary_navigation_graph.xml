@@ -2,19 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/secondary_navigation_graph"
-    app:startDestination="@id/homeFragment">
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.home_fragments.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
-    </fragment>
+    app:startDestination="@id/homeNestedGraph">
     <fragment
         android:id="@+id/makeFragment"
         android:name="com.example.gallery.fragments.GalleryFragments.make_fragments.MakeFragment"
-        android:label="MakeFragment" >
+        android:label="MakeFragment">
         <action
             android:id="@+id/action_makeFragment_to_makeNewPhotoFragment"
             app:destination="@id/makeNewPhotoFragment" />
@@ -22,7 +14,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -30,15 +22,12 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment">
         <action
             android:id="@+id/action_settingsFragment_to_editPasswordFragment"
             app:destination="@id/editPasswordFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.home_fragments.DetailFragment"
-        android:label="DetailFragment" />
+
     <fragment
         android:id="@+id/makeNewPhotoFragment"
         android:name="com.example.gallery.fragments.GalleryFragments.make_fragments.MakeNewPhotoFragment"
@@ -46,7 +35,7 @@
     <fragment
         android:id="@+id/editPasswordFragment"
         android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.EditPasswordFragment"
-        android:label="EditPasswordFragment" >
+        android:label="EditPasswordFragment">
         <action
             android:id="@+id/action_editPasswordFragment_to_congratulationFragment"
             app:destination="@id/congratulationFragment" />
@@ -54,9 +43,25 @@
     <fragment
         android:id="@+id/congratulationFragment"
         android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.CongratulationFragment"
-        android:label="CongratulationFragment" >
+        android:label="CongratulationFragment">
         <action
             android:id="@+id/action_congratulationFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
     </fragment>
+    <navigation
+        android:id="@+id/homeNestedGraph"
+        app:startDestination="@id/homeFragment">
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.home_fragments.HomeFragment"
+            android:label="HomeFragment">
+            <action
+                android:id="@+id/action_homeFragment_to_detailFragment"
+                app:destination="@id/detailFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/detailFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.home_fragments.DetailFragment"
+            android:label="DetailFragment" />
+    </navigation>
 </navigation>

@@ -1,11 +1,14 @@
-package com.example.gallery.fragments.GalleryFragments.recycler_adapters
+package com.example.gallery.fragments.GalleryFragments.home_fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gallery.MyOnItemClickListener
 import com.example.gallery.R
 import com.example.gallery.databinding.PhotoItemNewAndPopularBinding
-import com.example.gallery.fragments.GalleryFragments.recycler_adapters.NewPhotosRCAdapter.NewPhotosViewHolder
+import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.PhotoItem
+import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.PhotoItemType
+import com.example.gallery.fragments.GalleryFragments.home_fragments.adapters.NewPhotosRCAdapter.NewPhotosViewHolder
 
 //Я уже забыл, как клики на элементы делаются через интерфейс, поэтому когда логику буду прописывать,
 //добавлю это, а пока что пусть контроллер будет в адаптере(да, со мной будет трудно работать)

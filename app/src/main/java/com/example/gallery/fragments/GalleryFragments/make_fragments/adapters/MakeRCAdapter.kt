@@ -1,11 +1,12 @@
-package com.example.gallery.fragments.GalleryFragments.recycler_adapters
+package com.example.gallery.fragments.GalleryFragments.make_fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.R
 import com.example.gallery.databinding.PhotoItemMakeBinding
-import com.example.gallery.fragments.GalleryFragments.recycler_adapters.MakeRCAdapter.MakeViewHolder
+import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.MakeRCAdapter.MakeViewHolder
+import com.example.gallery.MyOnItemClickListener
 
 
 //Тут я вспомнил, как делать через интерфейс

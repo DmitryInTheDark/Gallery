@@ -31,8 +31,5 @@ class MainFragment : Fragment() {
         val navController = (childFragmentManager.findFragmentById(R.id.secondFragmentContainer) as NavHostFragment).navController
 
         binding.mainBottomNavView.setupWithNavController(navController)
-
-
-
     }
 }

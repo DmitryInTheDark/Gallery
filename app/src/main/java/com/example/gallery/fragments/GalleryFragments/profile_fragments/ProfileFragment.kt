@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.gallery.R
 import com.example.gallery.databinding.ProfileFragmentBinding
-import com.example.gallery.fragments.GalleryFragments.recycler_adapters.ProfileRCAdapter
+import com.example.gallery.fragments.GalleryFragments.profile_fragments.adapters.ProfileRCAdapter
 
 class ProfileFragment : Fragment() {
 

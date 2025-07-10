@@ -1,4 +1,4 @@
-package com.example.gallery.fragments.GalleryFragments.recycler_adapters
+package com.example.gallery.fragments.GalleryFragments.make_fragments.adapters
 
 sealed class PhotoItemType {
 

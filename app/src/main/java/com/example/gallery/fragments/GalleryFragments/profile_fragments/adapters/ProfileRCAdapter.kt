@@ -1,11 +1,11 @@
-package com.example.gallery.fragments.GalleryFragments.recycler_adapters
+package com.example.gallery.fragments.GalleryFragments.profile_fragments.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.R
 import com.example.gallery.databinding.PhotoItemProfileBinding
-import com.example.gallery.fragments.GalleryFragments.recycler_adapters.ProfileRCAdapter.ProfileViewHolder
+import com.example.gallery.fragments.GalleryFragments.profile_fragments.adapters.ProfileRCAdapter.ProfileViewHolder
 
 class ProfileRCAdapter: RecyclerView.Adapter<ProfileViewHolder>() {
 

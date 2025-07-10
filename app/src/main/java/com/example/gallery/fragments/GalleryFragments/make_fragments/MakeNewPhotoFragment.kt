@@ -51,6 +51,10 @@ class MakeNewPhotoFragment : Fragment() {
 
         binding.materialToolbar3.title = "New Photo"
 
+        val args = arguments
+
+        binding.imageNewPhoto.setImageResource(args?.getInt("image") ?: R.drawable.test_photo)
+
         binding.editNameNewPhoto.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
