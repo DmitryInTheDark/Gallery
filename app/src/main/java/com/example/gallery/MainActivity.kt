@@ -34,5 +34,25 @@ class MainActivity : AppCompatActivity() {
 
         val navController = (supportFragmentManager.findFragmentById(R.id.mainFragmentContainer) as NavHostFragment).navController
 
+
+        val api = (application as MyApp).photoApi
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val photos = api.registerUser(RequestUser("user@example.com",
+                    "https://example.com/",
+                    "2025-07-11T08:21:30.939Z",
+                    "name",
+                    listOf("role"),
+                    "8888888",
+                    "password"
+                )
+                )
+                Log.i("my", photos.email)
+            }catch (e: Exception){
+                Log.i("my", e.localizedMessage)
+            }
+
+        }
     }
 }

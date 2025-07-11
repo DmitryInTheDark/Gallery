@@ -34,9 +34,7 @@ class MyApp: Application() {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://gallery.prod2.webant.ru/")
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
             .addConverterFactory(jsonConfig.asConverterFactory("application/ld+json".toMediaType()))
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
 
         photoApi = retrofit.create(ApiInterface::class.java)

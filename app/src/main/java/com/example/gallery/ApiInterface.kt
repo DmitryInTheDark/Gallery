@@ -2,6 +2,7 @@ package com.example.gallery
 
 import com.google.gson.annotations.SerializedName
 import io.reactivex.rxjava3.core.Single
+import kotlinx.serialization.Serializable
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -28,6 +29,7 @@ interface ApiInterface {
 }
 
 //Прям тут кину этот класс, чтобы далеко не ходить
+@Serializable
 data class RegUser(
     @SerializedName("@context")
     val contextRef: String,
@@ -44,6 +46,7 @@ data class RegUser(
 )
 
 //И этот тоже
+@Serializable
 data class RequestUser(
     @SerializedName("email")
     val email: String,
