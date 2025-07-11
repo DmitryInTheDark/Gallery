@@ -12,6 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:backgroundTint="@color/white"
         app:srcCompat="@drawable/back_icon" />
 
     <View

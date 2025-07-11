@@ -1,8 +1,10 @@
 package com.example.gallery
 
+import com.google.gson.annotations.SerializedName
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Call
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -10,19 +12,52 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-
-    @GET("users")
-    fun getUserList(
+    @GET("photos")
+    suspend fun getPhotos(
         @Query("page") page: Int,
-        @Query("itemsPerPage") itemsPerPage: Int
-    ): Call<User>
+        @Query("itemsPerPage") itemsPerPage: Int,
+        @Query("order[id]") orderById: String,
+        @Query("new") isNew: Boolean,
+        @Query("popular") isPopular: Boolean
+    ): PhotoListResponse
 
-    @POST("token")
-    fun login(
-        @Query("grant_type") grant_type: String,
-        @Query("username") username: String?,
-        @Query("password") password: String?,
-        @Query("client_id") client_id: String?,
-        @Query("client_secret") client_secret: String?,
-    ): Call<User>
+    @POST("users")
+    suspend fun registerUser(
+        @Body regUser: RequestUser
+    ): RegUser
 }
+
+//Прям тут кину этот класс, чтобы далеко не ходить
+data class RegUser(
+    @SerializedName("@context")
+    val contextRef: String,
+    @SerializedName("@id")
+    val idRef: String,
+    @SerializedName("@type")
+    val typeRef: String,
+    val email: String,
+    val userProfilePhoto: String,
+    val birthday: String,
+    val displayName: String,
+    val roles: List<String>,
+    val phone: String,
+)
+
+//И этот тоже
+data class RequestUser(
+    @SerializedName("email")
+    val email: String,
+    @SerializedName("userProfilePhoto")
+    val userProfilePhoto: String,
+    @SerializedName("birthday")
+    val birthday: String,
+    @SerializedName("displayName")
+    val displayName: String,
+    @SerializedName("roles")
+    val roles: List<String>,
+    @SerializedName("phone")
+    val phone: String,
+    @SerializedName("plainPassword")
+    val plainPassword: String
+)
+

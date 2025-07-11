@@ -39,7 +39,7 @@ class EditPasswordFragment : Fragment() {
         binding.editTextOldPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
-                if (s.isNotEmpty() && binding.editTextOldPassword.text.isNotEmpty() && binding.editTextOldPassword.text.isNotEmpty()){
+                if (s.isNotEmpty() && binding.editTextNewPassword.text.isNotEmpty() && binding.editTextConfirmPassword.text.isNotEmpty()){
                     binding.buttonConfirmPasswordChange.isEnabled = true
                     binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
                     binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -60,7 +60,7 @@ class EditPasswordFragment : Fragment() {
         binding.editTextNewPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
-                if (s.isNotEmpty() && binding.editTextNewPassword.text.isNotEmpty() && binding.editTextNewPassword.text.isNotEmpty()){
+                if (s.isNotEmpty() && binding.editTextOldPassword.text.isNotEmpty() && binding.editTextConfirmPassword.text.isNotEmpty()){
                     binding.buttonConfirmPasswordChange.isEnabled = true
                     binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
                     binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -81,7 +81,7 @@ class EditPasswordFragment : Fragment() {
         binding.editTextConfirmPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null) return
-                if (s.isNotEmpty() && binding.editTextConfirmPassword.text.isNotEmpty() && binding.editTextConfirmPassword.text.isNotEmpty()){
+                if (s.isNotEmpty() && binding.editTextOldPassword.text.isNotEmpty() && binding.editTextNewPassword.text.isNotEmpty()){
                     binding.buttonConfirmPasswordChange.isEnabled = true
                     binding.buttonConfirmPasswordChange.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.black))
                     binding.buttonConfirmPasswordChange.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))

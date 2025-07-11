@@ -2,29 +2,25 @@ package com.example.gallery
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
+data class PhotoListResponse(
     @SerializedName("hydra:member")
     val memberList: List<Member>,
     @SerializedName("hydra:totalItems")
     val totalItems: Int,
     @SerializedName("hydra:view")
-    val view: UserView,
+    val view: PhotoView,
     @SerializedName("hydra:search")
-    val search: UserSearch
+    val search: PhotoSearch
 )
-data class Member(
-    @SerializedName("@id")
-    val dogId: String,
+
+data class Mapping(
     @SerializedName("@type")
-    val dogType: String,
-    val email: String,
-    val userProfilePhoto: String,
-    val birthday: String,
-    val displayName: String,
-    val roles: List<String>,
-    val phone:String
+    val type: String,
+    val variable: String,
+    val property: String,
+    val required: Boolean
 )
-data class UserView(
+data class PhotoView (
     @SerializedName("@id")
     val dogId: String,
     val type: String,
@@ -37,7 +33,8 @@ data class UserView(
     @SerializedName("hydra:next")
     val next: String
 )
-data class UserSearch(
+
+data class PhotoSearch(
     @SerializedName("@type")
     val dogType: String,
     @SerializedName("hydra:template")

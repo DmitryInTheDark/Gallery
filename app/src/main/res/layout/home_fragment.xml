@@ -26,7 +26,7 @@
         app:tabIndicatorColor="@color/pinky"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorHeight="2dp"
-        app:tabSelectedTextColor="@color/gray"
+        app:tabSelectedTextColor="@color/black"
         app:tabTextColor="@color/gray">
 
         <com.google.android.material.tabs.TabItem

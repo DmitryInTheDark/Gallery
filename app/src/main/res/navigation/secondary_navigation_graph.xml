@@ -60,7 +60,7 @@
             <action
                 android:id="@+id/action_editPasswordFragment_to_congratulationFragment"
                 app:destination="@id/congratulationFragment"
-                app:popUpTo="@id/editPasswordFragment"
+                app:popUpTo="@id/settingsFragment"
                 app:popUpToInclusive="true"/>
         </fragment>
         <fragment

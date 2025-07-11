@@ -108,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:backgroundTint="@color/black"
-            android:text="Save" />
+            android:text="Save"
+            app:cornerRadius="10dp" />
 
         <TextView
             android:id="@+id/textResetPassword"
