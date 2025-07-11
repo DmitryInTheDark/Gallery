@@ -8,13 +8,13 @@
         />
     <item
         android:title="make"
-        android:id="@+id/makeFragment"
+        android:id="@+id/makeNestedGraph"
         app:showAsAction="ifRoom"
         android:icon="@drawable/make_item_icon"
         />
     <item
         android:title="profile"
-        android:id="@+id/profileFragment"
+        android:id="@+id/profileNestedGraph"
         app:showAsAction="ifRoom"
         android:icon="@drawable/profile_item_icon"
         />

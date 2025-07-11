@@ -34,6 +34,10 @@ class MakeFragment : Fragment(), MyOnItemClickListener {
         binding.makeRCView.adapter = MakeRCAdapter(this)
         binding.makeRCView.layoutManager = GridLayoutManager(requireContext(), 4)
         binding.materialToolbar.title = "All Photos"
+
+        binding.floatingActionButton.setOnClickListener{
+            navController.navigate(R.id.action_makeFragment_to_makeNewPhotoFragment)
+        }
     }
 
     override fun onItemClick(item: PhotoItem) {

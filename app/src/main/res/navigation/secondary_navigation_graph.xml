@@ -3,51 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/secondary_navigation_graph"
     app:startDestination="@id/homeNestedGraph">
-    <fragment
-        android:id="@+id/makeFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.make_fragments.MakeFragment"
-        android:label="MakeFragment">
-        <action
-            android:id="@+id/action_makeFragment_to_makeNewPhotoFragment"
-            app:destination="@id/makeNewPhotoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.ProfileFragment"
-        android:label="ProfileFragment">
-        <action
-            android:id="@+id/action_profileFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.SettingsFragment"
-        android:label="SettingsFragment">
-        <action
-            android:id="@+id/action_settingsFragment_to_editPasswordFragment"
-            app:destination="@id/editPasswordFragment" />
-    </fragment>
 
-    <fragment
-        android:id="@+id/makeNewPhotoFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.make_fragments.MakeNewPhotoFragment"
-        android:label="MakeNewPhotoFragment" />
-    <fragment
-        android:id="@+id/editPasswordFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.EditPasswordFragment"
-        android:label="EditPasswordFragment">
-        <action
-            android:id="@+id/action_editPasswordFragment_to_congratulationFragment"
-            app:destination="@id/congratulationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/congratulationFragment"
-        android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.CongratulationFragment"
-        android:label="CongratulationFragment">
-        <action
-            android:id="@+id/action_congratulationFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
     <navigation
         android:id="@+id/homeNestedGraph"
         app:startDestination="@id/homeFragment">
@@ -63,5 +19,54 @@
             android:id="@+id/detailFragment"
             android:name="com.example.gallery.fragments.GalleryFragments.home_fragments.DetailFragment"
             android:label="DetailFragment" />
+    </navigation>
+    <navigation android:id="@+id/makeNestedGraph"
+        app:startDestination="@id/makeFragment">
+        <fragment
+            android:id="@+id/makeFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.make_fragments.MakeFragment"
+            android:label="MakeFragment">
+            <action
+                android:id="@+id/action_makeFragment_to_makeNewPhotoFragment"
+                app:destination="@id/makeNewPhotoFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/makeNewPhotoFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.make_fragments.MakeNewPhotoFragment"
+            android:label="MakeNewPhotoFragment" />
+    </navigation>
+    <navigation android:id="@+id/profileNestedGraph"
+        app:startDestination="@id/profileFragment">
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.ProfileFragment"
+            android:label="ProfileFragment">
+            <action
+                android:id="@+id/action_profileFragment_to_settingsFragment"
+                app:destination="@id/settingsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/settingsFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.SettingsFragment"
+            android:label="SettingsFragment">
+            <action
+                android:id="@+id/action_settingsFragment_to_editPasswordFragment"
+                app:destination="@id/editPasswordFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/editPasswordFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.EditPasswordFragment"
+            android:label="EditPasswordFragment">
+            <action
+                android:id="@+id/action_editPasswordFragment_to_congratulationFragment"
+                app:destination="@id/congratulationFragment"
+                app:popUpTo="@id/editPasswordFragment"
+                app:popUpToInclusive="true"/>
+        </fragment>
+        <fragment
+            android:id="@+id/congratulationFragment"
+            android:name="com.example.gallery.fragments.GalleryFragments.profile_fragments.CongratulationFragment"
+            android:label="CongratulationFragment">
+        </fragment>
     </navigation>
 </navigation>
