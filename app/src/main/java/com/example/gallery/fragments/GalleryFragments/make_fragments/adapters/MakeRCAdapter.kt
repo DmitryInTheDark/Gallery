@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gallery.R
 import com.example.gallery.databinding.PhotoItemMakeBinding
 import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.MakeRCAdapter.MakeViewHolder
-import com.example.gallery.MyOnItemClickListener
+import com.example.gallery.fragments.GalleryFragments.MyOnItemClickListener
 
 
 //Тут я вспомнил, как делать через интерфейс

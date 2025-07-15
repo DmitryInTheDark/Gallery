@@ -75,7 +75,7 @@
             android:drawableEnd="@drawable/birthday_icon_edit_text"
             android:ems="10"
             android:hint="Birthday"
-            android:inputType="text"
+            android:inputType="date"
             android:padding="8dp" />
 
         <EditText

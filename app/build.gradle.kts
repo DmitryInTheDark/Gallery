@@ -41,24 +41,17 @@ android {
 }
 
 dependencies {
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.rxjava)
+
+    //модули
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
     implementation(libs.photoview)
-    implementation(libs.moshi)
-    implementation(libs.moshi.kotlin)
     implementation(libs.androidx.cardview)
-    ksp(libs.moshi.kotlin.codegen)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.navigation.dynamic.features.fragment)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

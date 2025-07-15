@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.gallery.R
 import com.example.gallery.databinding.NewPhotosFragmentBinding
-import com.example.gallery.MyOnItemClickListener
+import com.example.gallery.fragments.GalleryFragments.MyOnItemClickListener
 import com.example.gallery.fragments.GalleryFragments.home_fragments.adapters.NewPhotosRCAdapter
 import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.PhotoItem
 import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.PhotoItemType
