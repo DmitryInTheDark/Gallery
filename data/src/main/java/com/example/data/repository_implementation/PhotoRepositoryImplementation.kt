@@ -1,8 +1,6 @@
 package com.example.data.repository_implementation
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.util.Log
 import com.example.data.remote_storage.RetrofitClient
 import com.example.data.remote_storage.models.photo.GetPhotoResponse
@@ -12,7 +10,6 @@ import com.example.domain.repository.PhotoRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.InputStream
 
 
 class PhotoRepositoryImplementation(context: Context): PhotoRepository {
