@@ -8,12 +8,12 @@ class SignUpUseCase(private val userRepository: UserRepository) {
 
     suspend fun execute(registerUserModel: RegisterUserModel): Result<String>{
 
-        if (registerUserModel.password != registerUserModel.confirmPassword){
-            return Result.Error("Пароли не совпадают")
+        return if (registerUserModel.password != registerUserModel.confirmPassword){
+            Result.Error("Пароли не совпадают")
         }else if (registerUserModel.password.isEmpty() || registerUserModel.confirmPassword.isEmpty()){
-            return Result.Error("Пустые поля паролей")
+            Result.Error("Пустые поля паролей")
         }else {
-            return userRepository.signUp(registerUserModel)
+            userRepository.signUp(registerUserModel)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.data.repository_implementation
 
 import android.content.Context
+import android.util.Log
 import com.example.data.remote_storage.RetrofitClient
 import com.example.data.remote_storage.models.register_user.RegisterUserBody
 import com.example.data.remote_storage.models.token.GetTokenBody
@@ -9,17 +10,19 @@ import com.example.domain.repository.PhotoRepository
 import com.example.domain.repository.UserRepository
 import java.io.InputStream
 import androidx.core.content.edit
+import com.example.data.remote_storage.models.ErrorBodyResponse
 import com.example.domain.models.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 class UserRepositoryImplementation(context: Context): UserRepository, PhotoRepository {
 
-    val retrofitClient = RetrofitClient(context)
-    var api = retrofitClient.configureRetrofit()
-    val sharedPreferences = retrofitClient.sharedPreferences
+    private val retrofitClient = RetrofitClient(context)
+    private var api = retrofitClient.configureRetrofit()
+    private val sharedPreferences = retrofitClient.sharedPreferences
 
     override suspend fun signUp(registerUserModel: RegisterUserModel): Result<String> {
             val requestBody = registerUserModelToRegisterUserBody(registerUserModel)
@@ -42,8 +45,14 @@ class UserRepositoryImplementation(context: Context): UserRepository, PhotoRepos
                 val data  = response.message()
                 return Result.Success(data)
             }else{
-                return Result.Error(response.errorBody()!!.string())
-
+                val error = response.errorBody()?.string() ?: "Неизвестная ошибка"
+                val errorDescription = try {
+                    Json.decodeFromString<ErrorBodyResponse>(error).description
+                }catch (e: Exception){
+                    Log.i("my", e.message.toString())
+                    "Неизвестная ошибка"
+                }
+                return Result.Error(errorDescription)
             }
         }catch (e: Exception){
             return Result.Error(e.message.toString())
