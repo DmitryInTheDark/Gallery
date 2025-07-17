@@ -47,7 +47,8 @@ class UserRepositoryImplementation(context: Context): UserRepository, PhotoRepos
             }else{
                 val error = response.errorBody()?.string() ?: "Неизвестная ошибка"
                 val errorDescription = try {
-                    Json.decodeFromString<ErrorBodyResponse>(error).description
+                    val json = Json{ ignoreUnknownKeys = true }
+                    json.decodeFromString<ErrorBodyResponse>(error).description
                 }catch (e: Exception){
                     Log.i("my", e.message.toString())
                     "Неизвестная ошибка"

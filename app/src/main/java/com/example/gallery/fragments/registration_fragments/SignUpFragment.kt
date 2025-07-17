@@ -90,7 +90,9 @@ class SignUpFragment : Fragment() {
             CoroutineScope(Dispatchers.IO).launch {
                 val result = signUpUseCase.execute(registerUser)
                 if (result is Result.Success){
-                    findNavController().navigate(R.id.action_signUpFragment_to_mainFragment)
+                    withContext(Dispatchers.Main){
+                        findNavController().navigate(R.id.action_signUpFragment_to_mainFragment)
+                    }
                 }else if (result is Result.Error){
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
