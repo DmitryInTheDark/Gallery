@@ -8,23 +8,20 @@ import com.example.data.remote_storage.models.token.GetTokenBody
 import com.example.domain.models.RegisterUserModel
 import com.example.domain.repository.PhotoRepository
 import com.example.domain.repository.UserRepository
-import java.io.InputStream
 import androidx.core.content.edit
 import com.example.data.remote_storage.models.ErrorBodyResponse
-import com.example.domain.models.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.example.data.remote_storage.models.photo.GetPhotoResponse
+import com.example.domain.models.PhotoModel
+import com.example.domain.models.MyResult
 import kotlinx.serialization.json.Json
 
-class UserRepositoryImplementation(context: Context): UserRepository, PhotoRepository {
+class UserRepositoryImplementation(context: Context): UserRepository {
 
     private val retrofitClient = RetrofitClient(context)
     private var api = retrofitClient.configureRetrofit()
     private val sharedPreferences = retrofitClient.sharedPreferences
 
-    override suspend fun signUp(registerUserModel: RegisterUserModel): Result<String> {
+    override suspend fun signUp(registerUserModel: RegisterUserModel): MyResult<String> {
             val requestBody = registerUserModelToRegisterUserBody(registerUserModel)
         try {
             val response = api.registerUser(requestBody)
@@ -43,7 +40,7 @@ class UserRepositoryImplementation(context: Context): UserRepository, PhotoRepos
                 api = retrofitClient.configureRetrofit()
 
                 val data  = response.message()
-                return Result.Success(data)
+                return MyResult.Success(data)
             }else{
                 val error = response.errorBody()?.string() ?: "Неизвестная ошибка"
                 val errorDescription = try {
@@ -53,23 +50,23 @@ class UserRepositoryImplementation(context: Context): UserRepository, PhotoRepos
                     Log.i("my", e.message.toString())
                     "Неизвестная ошибка"
                 }
-                return Result.Error(errorDescription)
+                return MyResult.Error(errorDescription)
             }
         }catch (e: Exception){
-            return Result.Error(e.message.toString())
+            return MyResult.Error(e.message.toString())
         }
     }
 
-    override fun signIn(): String {
+    override fun signIn(): MyResult<String> {
         TODO("Not yet implemented")
     }
 
-    override fun getPhotos(page: Int, isNew: Boolean, isPopular: Boolean): List<InputStream> {
-        TODO("Not yet implemented")
-    }
+
 
     private fun registerUserModelToRegisterUserBody(registerUserModel: RegisterUserModel): RegisterUserBody{
         return RegisterUserBody(registerUserModel.email, registerUserModel.birthday,
             registerUserModel.userName, registerUserModel.phoneNumber, registerUserModel.password)
     }
+
+
 }

@@ -1,12 +1,12 @@
 package com.example.domain.repository
 
 import com.example.domain.models.RegisterUserModel
-import com.example.domain.models.Result
+import com.example.domain.models.MyResult
 
 interface UserRepository {
 
-    suspend fun signUp(registerUserModel: RegisterUserModel): Result<String>
+    suspend fun signUp(registerUserModel: RegisterUserModel): MyResult<String>
 
-    fun signIn(): String
+    fun signIn(): MyResult<String>
 
 }

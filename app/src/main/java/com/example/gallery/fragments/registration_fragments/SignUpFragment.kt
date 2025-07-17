@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.data.repository_implementation.UserRepositoryImplementation
 import com.example.domain.models.RegisterUserModel
-import com.example.domain.models.Result
+import com.example.domain.models.MyResult
 import com.example.domain.use_case.SignUpUseCase
 import com.example.gallery.R
 import com.example.gallery.databinding.SignUpFragmentBinding
@@ -89,11 +89,11 @@ class SignUpFragment : Fragment() {
                 )
             CoroutineScope(Dispatchers.IO).launch {
                 val result = signUpUseCase.execute(registerUser)
-                if (result is Result.Success){
+                if (result is MyResult.Success){
                     withContext(Dispatchers.Main){
                         findNavController().navigate(R.id.action_signUpFragment_to_mainFragment)
                     }
-                }else if (result is Result.Error){
+                }else if (result is MyResult.Error){
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
                     }

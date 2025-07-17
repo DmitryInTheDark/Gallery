@@ -1,9 +1,10 @@
 package com.example.domain.repository
 
-import java.io.InputStream
+import com.example.domain.models.MyResult
+import com.example.domain.models.PhotoModel
 
 interface PhotoRepository {
 
-    fun getPhotos(page: Int, isNew: Boolean, isPopular: Boolean): List<InputStream>
+    suspend fun getPhotos(page: Int, isNew: Boolean, isPopular: Boolean): MyResult<List<PhotoModel>>
 
 }
