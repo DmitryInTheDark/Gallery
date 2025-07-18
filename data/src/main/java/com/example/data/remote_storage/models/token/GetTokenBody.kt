@@ -1,12 +1,13 @@
 package com.example.data.remote_storage.models.token
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class GetTokenBody(
-    val grant_type: String = "password",
-    val username: String,
-    val password: String,
-    val client_id: String = "123",
-    val client_secret: String = "123"
+    @SerialName("grant_type") val grantType: String,
+    @SerialName("username") val username: String,
+    @SerialName("password") val password: String,
+    @SerialName("client_id") val clientID: String,
+    @SerialName("client_secret") val clientSecret: String
 )

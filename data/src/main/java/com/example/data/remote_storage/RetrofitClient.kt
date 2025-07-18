@@ -2,12 +2,15 @@ package com.example.data.remote_storage
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
+import okhttp3.Authenticator
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.UUID
 
 class RetrofitClient(context: Context){
@@ -40,15 +43,17 @@ class RetrofitClient(context: Context){
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
-                    .addConverterFactory(jsonConfiguration.asConverterFactory("application/ld+json".toMediaType()))
+                    .addConverterFactory(jsonConfiguration.asConverterFactory("application/json".toMediaType()))
                     .build()
 
                 retrofitInstance = retrofit
             }
+            Log.i("retrofit", "1")
             return retrofit!!.create(ApiInterface::class.java)
         }else{
             synchronized(this){
                 val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
                 val okHttpClient = OkHttpClient.Builder()
                     .addInterceptor { chain ->
                         val request = chain.request().newBuilder()
@@ -65,6 +70,7 @@ class RetrofitClient(context: Context){
 
                 retrofitInstance = retrofit
             }
+            Log.i("retrofit", "2")
             return retrofit!!.create(ApiInterface::class.java)
         }
     }

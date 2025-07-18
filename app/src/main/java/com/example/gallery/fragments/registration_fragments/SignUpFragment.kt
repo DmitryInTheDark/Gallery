@@ -91,7 +91,7 @@ class SignUpFragment : Fragment() {
                 val result = signUpUseCase.execute(registerUser)
                 if (result is MyResult.Success){
                     withContext(Dispatchers.Main){
-                        findNavController().navigate(R.id.action_signUpFragment_to_mainFragment)
+                        findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
                     }
                 }else if (result is MyResult.Error){
                     withContext(Dispatchers.Main){

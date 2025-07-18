@@ -13,30 +13,26 @@ import com.example.data.remote_storage.models.ErrorBodyResponse
 import com.example.data.remote_storage.models.photo.GetPhotoResponse
 import com.example.domain.models.PhotoModel
 import com.example.domain.models.MyResult
+import com.example.domain.models.SignInUserModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
 class UserRepositoryImplementation(context: Context): UserRepository {
 
     private val retrofitClient = RetrofitClient(context)
     private var api = retrofitClient.configureRetrofit()
-    private val sharedPreferences = retrofitClient.sharedPreferences
+    private val sharedPreferences = context.getSharedPreferences(RetrofitClient.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+
 
     override suspend fun signUp(registerUserModel: RegisterUserModel): MyResult<String> {
             val requestBody = registerUserModelToRegisterUserBody(registerUserModel)
         try {
             val response = api.registerUser(requestBody)
             if (response.isSuccessful){
-                val tokenResponse = api.getToken(GetTokenBody(username = requestBody.displayName, password = requestBody.plainPassword))
-                sharedPreferences.edit {
-                    putString(
-                        RetrofitClient.TOKEN_NAME,
-                        tokenResponse.body()?.token
-                    )
-                    putString(
-                        RetrofitClient.REFRESH_TOKEN_NAME,
-                        tokenResponse.body()?.refresh_token
-                    )
-                }
+
                 api = retrofitClient.configureRetrofit()
 
                 val data  = response.message()
@@ -57,8 +53,27 @@ class UserRepositoryImplementation(context: Context): UserRepository {
         }
     }
 
-    override fun signIn(): MyResult<String> {
-        TODO("Not yet implemented")
+    override suspend fun signIn(signInUserModel: SignInUserModel): MyResult<String>{
+        try {
+            val tokenResponse = api.getToken(signInUserModelToGetTokenBody(signInUserModel))
+            val tokenBody = tokenResponse.body()
+            if (tokenResponse.isSuccessful){
+                Log.i("sh", sharedPreferences.getString(RetrofitClient.TOKEN_NAME, "No") ?: "Ничего")
+                if (tokenBody != null){
+                    sharedPreferences.edit(commit = true){
+                        putString(RetrofitClient.TOKEN_NAME, tokenBody.token)
+                        putString(RetrofitClient.REFRESH_TOKEN_NAME, tokenBody.refreshToken)
+                    }
+                    Log.i("sh", sharedPreferences.getString(RetrofitClient.TOKEN_NAME, "No") ?: "Ничего")
+                }
+                api = retrofitClient.configureRetrofit()
+                return MyResult.Success(tokenResponse.code().toString())
+            }else {
+                return MyResult.Error(tokenResponse.errorBody()?.string() ?: "Неизвестная ошибка")
+            }
+        }catch (e: Exception){
+            return MyResult.Error(e.message ?: "Неизвестная ошибка")
+        }
     }
 
 
@@ -68,5 +83,14 @@ class UserRepositoryImplementation(context: Context): UserRepository {
             registerUserModel.userName, registerUserModel.phoneNumber, registerUserModel.password)
     }
 
+    private fun signInUserModelToGetTokenBody(signInUserModel: SignInUserModel): GetTokenBody{
+        return GetTokenBody(
+            grantType = "password",
+            username = signInUserModel.email,
+            password = signInUserModel.password,
+            clientID = "123",
+            clientSecret = "123"
+        )
+    }
 
 }
