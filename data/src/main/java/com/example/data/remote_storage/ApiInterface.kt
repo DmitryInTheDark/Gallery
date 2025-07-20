@@ -1,20 +1,24 @@
 package com.example.data.remote_storage
 
 import com.example.data.remote_storage.models.photo.GetPhotoResponse
+import com.example.data.remote_storage.models.photo.GetSinglePhotoResponse
 import com.example.data.remote_storage.models.register_user.RegisterUserBody
 import com.example.data.remote_storage.models.register_user.RegisterUserResponse
 import com.example.data.remote_storage.models.token.GetTokenBody
 import com.example.data.remote_storage.models.token.GetTokenResponse
+import com.example.data.remote_storage.models.token.RefreshTokenBody
+import com.example.data.remote_storage.models.user.CurrentUserResponse
+import com.example.data.remote_storage.models.user.UpdateUserBody
+import com.example.data.remote_storage.models.user.UpdateUserResponse
 import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Streaming
-import java.io.InputStream
 
 interface ApiInterface {
 
@@ -28,6 +32,11 @@ interface ApiInterface {
         @Body getTokenBody: GetTokenBody
     ): Response<GetTokenResponse>
 
+    @POST("token")
+    suspend fun refreshToken(
+        @Body getTokenBody: RefreshTokenBody
+    ): Response<GetTokenResponse>
+
     @GET("photos")
     suspend fun getPhotos(
         @Query("page") page: Int = 1,
@@ -39,5 +48,19 @@ interface ApiInterface {
     @GET("get_file/{path}")
     suspend fun getFile(
         @Path("path") path: String
-    ): Call<ResponseBody>
+    ): Response<ResponseBody>
+
+    @GET("photos/{id}")
+    suspend fun getPhotoByID(
+        @Path("id") id: String
+    ): Response<GetSinglePhotoResponse>
+
+    @GET("current")
+    suspend fun getCurrentUser(): Response<CurrentUserResponse>
+
+    @PATCH("users/{id}")
+    suspend fun updateUser(
+        @Path("id") id: String,
+        @Body updateUserBody: UpdateUserBody
+    ): Response<UpdateUserResponse>
 }

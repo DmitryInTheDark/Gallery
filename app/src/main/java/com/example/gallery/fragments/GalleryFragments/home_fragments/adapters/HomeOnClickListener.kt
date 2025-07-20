@@ -4,5 +4,5 @@ import com.example.domain.models.PhotoModel
 
 interface HomeOnClickListener {
 
-    fun onClick(item: PhotoModel)
+    fun onClick(item: PhotoModelWithBitmap)
 }

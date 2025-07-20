@@ -7,7 +7,7 @@ import com.example.gallery.fragments.GalleryFragments.home_fragments.PopularPhot
 
 class HomeViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
 
-    val fragmentList = listOf(NewPhotosFragment(), PopularPhotosFragment())
+    val fragmentList: List<Fragment> = listOf(NewPhotosFragment(), PopularPhotosFragment())
 
     override fun getItemCount(): Int {
         return fragmentList.size

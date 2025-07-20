@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
     kotlin("plugin.serialization") version "1.9.0"
 }
 
@@ -35,6 +37,10 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+
+    //DI
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     //Retrofit
     implementation(libs.converter.gson)

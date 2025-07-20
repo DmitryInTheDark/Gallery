@@ -12,19 +12,23 @@ import com.example.data.repository_implementation.UserRepositoryImplementation
 import com.example.domain.models.MyResult
 import com.example.domain.models.SignInUserModel
 import com.example.domain.use_case.SignInUseCase
+import com.example.domain.use_case.SignUpUseCase
 import com.example.gallery.R
 import com.example.gallery.databinding.SignInFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
 
     lateinit var binding: SignInFragmentBinding
-    private val userRepositoryImplementation: UserRepositoryImplementation by lazy {
-        UserRepositoryImplementation(requireContext())
-    }
+    @Inject
+    lateinit var userRepositoryImplementation: UserRepositoryImplementation
+
     private val signInUseCase: SignInUseCase by lazy {
         SignInUseCase(userRepositoryImplementation)
     }
@@ -58,7 +62,6 @@ class SignInFragment : Fragment() {
                     is MyResult.Success -> withContext(Dispatchers.Main){navController.navigate(R.id.action_signInFragment_to_mainFragment)}
                     is MyResult.Error -> withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
-                        Log.i("my", result.message)
                     }
                 }
             }

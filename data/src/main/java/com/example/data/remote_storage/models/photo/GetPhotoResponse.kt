@@ -1,5 +1,6 @@
 package com.example.data.remote_storage.models.photo
 
+import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -8,6 +9,7 @@ data class GetPhotoResponse(
     @SerialName("@context") val dogContext: String,
     @SerialName("@id") val dogId: String,
     @SerialName("@type") val dogType: String,
+    @SerialName("hydra:totalItems") val totalItems: Int,
     @SerialName("hydra:member") val member: List<Member>,
     @SerialName("hydra:view") val view: View,
     @SerialName("hydra:search") val search: Search
@@ -34,10 +36,7 @@ data class File(
 @Serializable
 data class View(
     @SerialName("@id") val dogId: String,
-    @SerialName("@type") val dogType: String,
-    @SerialName("hydra:first") val first: String,
-    @SerialName("hydra:last") val last: String,
-    @SerialName("hydra:next") val next: String
+    @SerialName("@type") val dogType: String
 )
 
 @Serializable

@@ -16,21 +16,22 @@ import com.example.domain.models.MyResult
 import com.example.domain.use_case.SignUpUseCase
 import com.example.gallery.R
 import com.example.gallery.databinding.SignUpFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     lateinit var binding: SignUpFragmentBinding
 
-    private val userRepositoryImplementation: UserRepositoryImplementation by lazy {
-        UserRepositoryImplementation(requireContext())
-    }
-    private val signUpUseCase: SignUpUseCase by lazy {
-        SignUpUseCase(userRepositoryImplementation)
-    }
+    @Inject
+    lateinit var userRepositoryImplementation: UserRepositoryImplementation
+    @Inject
+    lateinit var signUpUseCase: SignUpUseCase
 
 
     override fun onCreateView(
@@ -97,7 +98,6 @@ class SignUpFragment : Fragment() {
                     withContext(Dispatchers.Main){
                         Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
                     }
-                    Log.i("my", result.message)
                 }
             }
         }

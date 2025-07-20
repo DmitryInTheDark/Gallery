@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp") version "2.1.21-2.0.1"
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
     kotlin("plugin.serialization") version "1.9.10"
 }
 
@@ -45,6 +46,10 @@ dependencies {
     //модули
     implementation(project(":data"))
     implementation(project(":domain"))
+
+    //DI
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     implementation(libs.photoview)
     implementation(libs.androidx.cardview)

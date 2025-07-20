@@ -1,23 +1,37 @@
 package com.example.gallery.fragments.GalleryFragments.home_fragments
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar.OnMenuItemClickListener
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.gallery.R
+import com.example.domain.models.MyResult
+import com.example.domain.use_case.GetPhotoByIDUseCase
 import com.example.gallery.databinding.DetailsFragmentBinding
+import com.example.gallery.fragments.GalleryFragments.home_fragments.view_model.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private lateinit var binding: DetailsFragmentBinding
     private var isEdit = false
+
+    @Inject
+    lateinit var getPhotoByIDUseCase: GetPhotoByIDUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,21 +52,44 @@ class DetailFragment : Fragment() {
 
         val args = arguments
 
-        binding.imageView6.setImageResource(args?.getInt("image") ?: R.drawable.test_photo)
-        binding.textImageName.text = args?.getString("title") ?: "Default title"
-        binding.textImageDescription.text = args?.getString("description") ?: "Default description"
+        val file = args?.getString("id")
 
-        binding.imageView6.setImageResource(args?.getInt("image") ?: R.drawable.test_photo)
-        binding.editTextImageName.setText(args?.getString("title") ?: "Default title")
-        binding.editTextImageDescription.setText(args?.getString("description") ?: "Default description")
 
-        val isNew = args?.getBoolean("new?") ?: true
-        binding.radioButtonNew.isChecked = isNew
-        binding.radioButtonPopular.isChecked = !isNew
+        if (file == null){
+            Toast.makeText(requireContext(), "Файл не найден", Toast.LENGTH_SHORT).show()
+            navController.navigateUp()
+        }else{
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = getPhotoByIDUseCase.execute(file)
+                when(result){
+                    is MyResult.Success -> {
+                        val bitmap = BitmapFactory.decodeStream(result.data.inputStream)
+                        withContext(Dispatchers.Main){
+                            binding.imageView6.setImageBitmap(bitmap)
+                            binding.textImageName.text = result.data.name
+                            binding.textUsername.text = result.data.author
+                            binding.editTextImageName.setText(result.data.name)
+                            binding.editTextImageDescription.setText(result.data.description)
+                            binding.textImageDescription.text = result.data.description
+                            binding.textImageCreatedData.text = result.data.dateCreate
+                            binding.radioButtonNew.isChecked = result.data.isNew
+                            binding.radioButtonPopular.isChecked = result.data.isPopular
+                        }
+                    }
+                    is MyResult.Error -> {
+                        withContext(Dispatchers.Main){
+                            Toast.makeText(requireContext(), "Ошибка получения данных", Toast.LENGTH_SHORT).show()
+                            navController.navigateUp()
+                        }
+                    }
+                }
+            }
+        }
 
-        Log.i("my", args?.getString("title") ?: "Ничего не пришло")
-        Log.i("my", args?.getString("description") ?: "Ничего не пришло")
-        Log.i("my", isNew.toString())
+
+
+
+
 
          binding.buttonConfirmDetailsChanges.setOnClickListener{
              binding.materialToolbar5.menu.add("Edit")

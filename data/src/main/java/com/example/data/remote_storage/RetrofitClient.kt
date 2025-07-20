@@ -1,19 +1,18 @@
 package com.example.data.remote_storage
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
-import okhttp3.Authenticator
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.UUID
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RetrofitClient(context: Context){
+@Singleton
+class RetrofitClient @Inject constructor(context: Context){
 
     @Volatile
     var retrofitInstance: Retrofit? = null
@@ -48,7 +47,6 @@ class RetrofitClient(context: Context){
 
                 retrofitInstance = retrofit
             }
-            Log.i("retrofit", "1")
             return retrofit!!.create(ApiInterface::class.java)
         }else{
             synchronized(this){
@@ -70,8 +68,40 @@ class RetrofitClient(context: Context){
 
                 retrofitInstance = retrofit
             }
-            Log.i("retrofit", "2")
             return retrofit!!.create(ApiInterface::class.java)
         }
+    }
+
+    fun configureRetrofitForRegistration(): ApiInterface{
+
+        val jsonConfiguration = Json{
+            ignoreUnknownKeys = true
+        }
+
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(jsonConfiguration.asConverterFactory("application/ld+json".toMediaType()))
+            .build()
+
+        return retrofit.create(ApiInterface::class.java)
+    }
+
+    fun configureRetrofitForAuthorization(): ApiInterface{
+        val jsonConfiguration = Json{
+            ignoreUnknownKeys = true
+        }
+
+        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val okHttpClient = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(jsonConfiguration.asConverterFactory("application/json".toMediaType()))
+            .build()
+
+        return retrofit.create(ApiInterface::class.java)
     }
 }

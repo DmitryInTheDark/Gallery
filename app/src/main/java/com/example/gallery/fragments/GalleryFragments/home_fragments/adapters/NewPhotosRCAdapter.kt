@@ -13,12 +13,11 @@ class NewPhotosRCAdapter(private val listener: HomeOnClickListener): RecyclerVie
 
 
 
-    val itemList = mutableListOf<PhotoModel>()
+    val itemList = mutableListOf<PhotoModelWithBitmap>()
 
     class NewPhotosViewHolder(private val binding: PhotoItemNewAndPopularBinding, private val listener: HomeOnClickListener) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: PhotoModel){
-            val bitmap = BitmapFactory.decodeStream(item.image)
-            binding.imagePhotoItem.setImageBitmap(bitmap)
+        fun bind(item: PhotoModelWithBitmap){
+            binding.imagePhotoItem.setImageBitmap(item.image)
             binding.root.setOnClickListener {
                 listener.onClick(item)
             }
@@ -40,7 +39,19 @@ class NewPhotosRCAdapter(private val listener: HomeOnClickListener): RecyclerVie
 
 
     fun updatePhotoList(newList: List<PhotoModel>){
-        itemList.addAll(newList)
+        newList.forEach {
+            val bitmap = BitmapFactory.decodeStream(it.image)
+            if(bitmap != null){
+                val newPhotoModel = PhotoModelWithBitmap(
+                    it.id.toString(),
+                    it.path,
+                    bitmap,
+                    it.isNew,
+                    it.isPopular
+                )
+                itemList.add(newPhotoModel)
+            }
+        }
         notifyDataSetChanged()
     }
 }

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.gallery.databinding.HomeFragmentBinding
 import com.example.gallery.view_pager_adapter.HomeViewPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
