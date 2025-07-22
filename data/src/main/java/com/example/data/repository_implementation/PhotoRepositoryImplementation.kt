@@ -93,7 +93,7 @@ class PhotoRepositoryImplementation @Inject constructor(
         id: String
     ): MyResult<SinglePhotoModel> {
 //        try {
-////            val result = api.u
+//            val result = api.u
 //        }
         TODO()
     }

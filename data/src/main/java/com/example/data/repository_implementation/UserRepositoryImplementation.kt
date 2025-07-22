@@ -125,6 +125,30 @@ class UserRepositoryImplementation @Inject constructor(
         return response.isSuccessful
     }
 
+    override suspend fun deleteUser(id: String): Boolean {
+        try {
+            val result = api.deleteUser(id)
+            if (!authorize(result.code()) || !result.isSuccessful) return false
+            return when(result.code()){
+                204 -> {
+                    Log.i("delete", "Успешно 1")
+                    true
+                }
+                404 -> {
+                    Log.i("delete", "НЕ успешно")
+                    false
+                }
+                else -> {
+                    Log.i("delete", "Не успешно")
+                    false
+                }
+            }
+        }catch (e: Exception){
+            Log.i("delete", "Успешно")
+            return false
+        }
+    }
+
 
     private fun registerUserModelToRegisterUserBody(registerUserModel: RegisterUserModel): RegisterUserBody{
         return RegisterUserBody(registerUserModel.email, registerUserModel.birthday,
@@ -158,8 +182,16 @@ class UserRepositoryImplementation @Inject constructor(
                 }
                 api = retrofitClient.configureRetrofit()
             }
+            Log.i("authorize", "Успешно")
             return true
-        }else if (code in 200..300) return true else return false
+        }else if (code in 200..300) {
+            Log.i("authorize", "Успешно 2")
+            return true
+        } else{
+            Log.i("authorize", "НЕ успешно")
+            return false
+        }
+
     }
 
 }

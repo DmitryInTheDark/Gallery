@@ -2,7 +2,6 @@ package com.example.gallery.fragments.GalleryFragments.home_fragments
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -10,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar.OnMenuItemClickListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.domain.models.MyResult
 import com.example.domain.use_case.GetPhotoByIDUseCase
 import com.example.gallery.databinding.DetailsFragmentBinding
-import com.example.gallery.fragments.GalleryFragments.home_fragments.view_model.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -52,15 +49,15 @@ class DetailFragment : Fragment() {
 
         val args = arguments
 
-        val file = args?.getString("id")
+        val photoID = args?.getString("id")
 
 
-        if (file == null){
+        if (photoID == null){
             Toast.makeText(requireContext(), "Файл не найден", Toast.LENGTH_SHORT).show()
             navController.navigateUp()
         }else{
             CoroutineScope(Dispatchers.IO).launch {
-                val result = getPhotoByIDUseCase.execute(file)
+                val result = getPhotoByIDUseCase.execute(photoID)
                 when(result){
                     is MyResult.Success -> {
                         val bitmap = BitmapFactory.decodeStream(result.data.inputStream)

@@ -5,6 +5,7 @@ import com.example.data.remote_storage.RetrofitClient
 import com.example.data.repository_implementation.PhotoRepositoryImplementation
 import com.example.data.repository_implementation.UserRepositoryImplementation
 import com.example.domain.repository.UserRepository
+import com.example.domain.use_case.DeleteUserUseCase
 import com.example.domain.use_case.GetCurrentUserUseCase
 import com.example.domain.use_case.GetPhotoByIDUseCase
 import com.example.domain.use_case.GetPhotosUseCase
@@ -67,5 +68,11 @@ object MainModule {
     @Singleton
     fun provideUpdateUserDataUseCase(userRepositoryImplementation: UserRepositoryImplementation): UpdateUserDataUseCase{
         return UpdateUserDataUseCase(userRepositoryImplementation)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDeleteUserUseCase(userRepositoryImplementation: UserRepositoryImplementation): DeleteUserUseCase{
+        return DeleteUserUseCase((userRepositoryImplementation))
     }
 }

@@ -14,10 +14,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.data.remote_storage.RetrofitClient
 import com.example.data.repository_implementation.UserRepositoryImplementation
+import com.example.domain.use_case.DeleteUserUseCase
 import com.example.gallery.R
 import com.example.gallery.databinding.SettingsFragmentBinding
 import com.example.gallery.fragments.GalleryFragments.profile_fragments.view_model.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -25,6 +31,9 @@ class SettingsFragment : Fragment() {
     private lateinit var binding: SettingsFragmentBinding
 
     private val profileViewModel: ProfileViewModel by viewModels()
+
+    @Inject
+    lateinit var deleteUserUseCase: DeleteUserUseCase
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,8 +111,19 @@ class SettingsFragment : Fragment() {
             .show()
 
         dialog.findViewById<TextView>(R.id.alert_delete_text).setOnClickListener {
-            alertDialog.dismiss()
-            requireActivity().finish()
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = deleteUserUseCase.execute(profileViewModel.currentUserLiveData.value?.id.toString() ?: "")
+                when(result){
+                    true -> withContext(Dispatchers.Main){
+                        alertDialog.dismiss()
+                        requireActivity().finish()
+                    }
+                    false -> withContext(Dispatchers.Main){
+                        alertDialog.dismiss()
+                        Toast.makeText(requireContext(), "Ошибка, повторите попытку позже", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
 
         dialog.findViewById<TextView>(R.id.alert_delete_cancel_text).setOnClickListener {

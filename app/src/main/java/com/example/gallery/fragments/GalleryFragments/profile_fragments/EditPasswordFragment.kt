@@ -4,21 +4,33 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.domain.use_case.UpdateUserDataUseCase
 import com.example.gallery.R
 import com.example.gallery.databinding.EditPasswordFragmentBinding
 import com.example.gallery.databinding.ProfileFragmentBinding
 import com.example.gallery.databinding.SettingsFragmentBinding
+import com.example.gallery.fragments.GalleryFragments.profile_fragments.view_model.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class EditPasswordFragment : Fragment() {
 
     private lateinit var binding: EditPasswordFragmentBinding
+
+
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -101,7 +113,26 @@ class EditPasswordFragment : Fragment() {
         })
 
         binding.buttonConfirmPasswordChange.setOnClickListener {
-            navController.navigate(R.id.action_editPasswordFragment_to_congratulationFragment)
+            if(binding.editTextNewPassword.text.toString() != binding.editTextConfirmPassword.text.toString()){
+                Toast.makeText(requireContext(), "Несовпадение паролей", Toast.LENGTH_SHORT).show()
+            }else{
+                val user = profileViewModel.currentUserLiveData.value
+                if (user != null){
+                    val result = profileViewModel.updateUser(
+                        user.displayName,
+                        user.birthday,
+                        user.phone,
+                        user.email,
+                        binding.editTextOldPassword.text.toString(),
+                        binding.editTextNewPassword.text.toString(),
+                        user.id.toString()
+                    )
+                    if (result) navController.navigate(R.id.action_editPasswordFragment_to_congratulationFragment)
+                    else Toast.makeText(requireContext(), "Ошибка, повторите попытку позже", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(requireContext(), "Ошибка со стороны приложения, извиняюсь", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

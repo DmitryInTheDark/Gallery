@@ -22,4 +22,6 @@ interface UserRepository {
         oldPassword: String,
         newPassword: String
     ): Boolean
+
+    suspend fun deleteUser(id: String): Boolean
 }

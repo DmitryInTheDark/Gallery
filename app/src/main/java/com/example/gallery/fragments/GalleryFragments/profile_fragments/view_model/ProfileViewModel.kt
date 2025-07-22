@@ -50,24 +50,26 @@ class ProfileViewModel @Inject constructor(
         oldPassword: String,
         newPassword: String,
         id: String
-    ){
+    ): Boolean{
+        var result: Boolean? = null
         CoroutineScope(Dispatchers.IO).launch {
             if(updateUserDataUseCase.execute(
                 username, birthday, phone, email, id, oldPassword, newPassword
             )){
-                val result = getCurrentUserUseCase.execute()
-                Log.i("result viewModel", "${result is MyResult.Success}")
-                when(result){
+                when(val response = getCurrentUserUseCase.execute()){
                     is MyResult.Success -> {
-                        _currentUserLiveData.postValue(result.data)
+                        _currentUserLiveData.postValue(response.data)
+                        result = true
                     }
                     is MyResult.Error -> {
-                        Log.e("profileViewModel", "Error")
+                        result = false
                     }
                 }
-            }else{
-
             }
         }
+        while (result == null){
+            true
+        }
+        return result == true
     }
 }

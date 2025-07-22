@@ -13,6 +13,7 @@ import com.example.data.remote_storage.models.user.UpdateUserResponse
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -63,4 +64,15 @@ interface ApiInterface {
         @Path("id") id: String,
         @Body updateUserBody: UpdateUserBody
     ): Response<UpdateUserResponse>
+
+    @PATCH("photos/{id}")
+    suspend fun updatePhoto(
+        @Path("id") id: String,
+        @Body updateUserBody: UpdateUserBody
+    ): Response<UpdateUserResponse>
+
+    @DELETE("users/{id}")
+    suspend fun deleteUser(
+        @Path("id") id: String
+    ): Response<String>
 }
