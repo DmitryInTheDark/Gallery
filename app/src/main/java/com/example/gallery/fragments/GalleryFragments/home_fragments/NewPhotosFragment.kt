@@ -58,7 +58,7 @@ class NewPhotosFragment : Fragment(), HomeOnClickListener {
             }
         }
 
-
+        homeViewModel.getNewPhoto()
     }
 
     override fun onClick(item: PhotoModelWithBitmap) {

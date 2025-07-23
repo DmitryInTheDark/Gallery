@@ -62,7 +62,7 @@ class HomeViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             val newPhotoResponse = getPhotosUseCase.execute(currentPageNew, isNew = true, isPopular = false)
 
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.Main){
                 when(newPhotoResponse){
                     is MyResult.Success -> _newPhotoLiveData.value = newPhotoResponse.data
                     is MyResult.Error -> _newPhotoLiveData.value = emptyList()
