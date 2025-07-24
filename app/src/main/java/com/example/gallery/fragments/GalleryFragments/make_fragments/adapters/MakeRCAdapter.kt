@@ -15,27 +15,14 @@ class MakeRCAdapter(private val listener: MyOnItemClickListener) :
 
     var count = 0
 
-    val itemList = listOf(
-        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
-        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
-        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
-        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
-        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
-        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
-        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
-        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
-        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
-        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
-        PhotoItem(R.drawable.test_photo, "test_photo1", "очень длинное описание", PhotoItemType.New),
-        PhotoItem(R.drawable.test_photo2, "test_photo2", "очень длинное описание2", PhotoItemType.Popular),
-    )
+    val itemList = mutableListOf<PhotoItem>()
 
     class MakeViewHolder(
         private val binding: PhotoItemMakeBinding,
         private val listener: MyOnItemClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PhotoItem) {
-                binding.imagePhotoItem.setImageResource(item.image)
+                binding.imagePhotoItem.setImageBitmap(item.image)
                 binding.root.setOnClickListener {
                     listener.onItemClick(item)
                 }
@@ -53,6 +40,11 @@ class MakeRCAdapter(private val listener: MyOnItemClickListener) :
 
     override fun onBindViewHolder(holder: MakeViewHolder, position: Int) {
         holder.bind(itemList[position])
+    }
+
+    fun addPhotos(photos: List<PhotoItem>){
+        itemList.addAll(photos)
+        notifyDataSetChanged()
     }
 
 }

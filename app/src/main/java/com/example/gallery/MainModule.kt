@@ -12,6 +12,8 @@ import com.example.domain.use_case.GetPhotosUseCase
 import com.example.domain.use_case.SignInUseCase
 import com.example.domain.use_case.SignUpUseCase
 import com.example.domain.use_case.UpdateUserDataUseCase
+import com.example.gallery.fragments.GalleryFragments.make_fragments.MakeViewModel
+import com.example.gallery.fragments.GalleryFragments.make_fragments.adapters.MakeRCAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,5 +76,11 @@ object MainModule {
     @Singleton
     fun provideDeleteUserUseCase(userRepositoryImplementation: UserRepositoryImplementation): DeleteUserUseCase{
         return DeleteUserUseCase((userRepositoryImplementation))
+    }
+
+    @Provides
+    @Singleton
+    fun provideMakeViewModel(getPhotosUseCase: GetPhotosUseCase): MakeViewModel{
+        return MakeViewModel(getPhotosUseCase)
     }
 }

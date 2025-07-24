@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.models.PhotoModel
 import com.example.gallery.R
 import com.example.gallery.databinding.NewPhotosFragmentBinding
@@ -59,12 +60,25 @@ class NewPhotosFragment : Fragment(), HomeOnClickListener {
         }
 
         homeViewModel.getNewPhoto()
+
+        binding.newPhotosRCView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val itemCount = (recyclerView.layoutManager as GridLayoutManager).itemCount
+                val lastVisibleItem = (recyclerView.layoutManager as GridLayoutManager).findLastVisibleItemPosition()
+                if (lastVisibleItem != RecyclerView.NO_POSITION && lastVisibleItem >= itemCount - 3){
+                    homeViewModel.getNewPhoto()
+                }
+            }
+        })
     }
 
     override fun onClick(item: PhotoModelWithBitmap) {
         val args = Bundle()
 
         args.putString("id", item.id)
+        homeViewModel.clearPageCount()
 
         findNavController().navigate(R.id.action_homeFragment_to_detailFragment, args)
     }

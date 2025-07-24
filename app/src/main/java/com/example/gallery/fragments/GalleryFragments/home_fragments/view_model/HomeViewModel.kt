@@ -30,8 +30,8 @@ class HomeViewModel @Inject constructor(
     private val _currentPhotoLiveData = MutableLiveData<SinglePhotoModel>()
     val currentPhotoLiveData = _currentPhotoLiveData
 
-    private val currentPageNew = 1
-    private val currentPagePopular = 1
+    private var currentPageNew = 1
+    private var currentPagePopular = 1
     private var isLoading = false
 
     init {
@@ -68,7 +68,7 @@ class HomeViewModel @Inject constructor(
                     is MyResult.Error -> _newPhotoLiveData.value = emptyList()
                 }
             }
-
+            currentPageNew++
             isLoading = false
         }
     }
@@ -77,7 +77,7 @@ class HomeViewModel @Inject constructor(
 
         CoroutineScope(Dispatchers.IO).launch {
             if (isLoading) return@launch
-            val popularPhotoResponse = getPhotosUseCase.execute(currentPageNew, isNew = false, isPopular = true)
+            val popularPhotoResponse = getPhotosUseCase.execute(currentPagePopular, isNew = false, isPopular = true)
 
             withContext(Dispatchers.Main){
                 when(popularPhotoResponse){
@@ -90,9 +90,14 @@ class HomeViewModel @Inject constructor(
 
                 }
             }
-
+            currentPagePopular++
             isLoading = false
         }
+    }
+
+    fun clearPageCount(){
+        currentPageNew = 1
+        currentPagePopular = 1
     }
 
 }
